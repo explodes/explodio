@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../staging
+  - local_service.yaml
+patchesStrategicMerge:
+  - patch_configmap_environment.yaml
+  - patch_replica.yaml
+images:
+  - name: tokyo
+    newName: explodio/tokyo
+    newTag: latest
+  - name: tokyo-flyway
+    newName: explodio/tokyo/flyway
+    newTag: latest

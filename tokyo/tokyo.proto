@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tokyo;
+option go_package = "github.com/explodes/explodio/tokyo";
+
+message User {
+  string uuid = 1;
+  string email = 2;
+}

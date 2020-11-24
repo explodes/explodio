@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tokyo
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: tokyo
+      app-type: webapp
+  template:
+    metadata:
+      labels:
+        app: tokyo
+        app-type: webapp
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - name: flyway
+          image: tokyo-flyway
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: tokyo-secrets
+      containers:
+        - name: tokyo
+          image: tokyo
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 80
+          envFrom:
+            - configMapRef:
+                name: tokyo
+            - secretRef:
+                name: tokyo-secrets
+          resources:
+            limits:
+              memory: 1024Mi

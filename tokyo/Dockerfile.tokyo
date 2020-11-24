@@ -1,0 +1,8 @@
+FROM golang:1.15.5 AS build
+WORKDIR /src
+COPY . .
+RUN go build -o /out/bin ./cmd/tokyo_server
+
+FROM scratch AS bin
+COPY --from=build /out/bin /
+ENTRYPOINT /out/bin/tokyo_server

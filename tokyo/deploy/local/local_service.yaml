@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: tokyo
+  name: tokyo-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 81
+      targetPort: 81
+      protocol: TCP
+  selector:
+    app: tokyo
+    app-type: webapp
