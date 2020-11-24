@@ -3,6 +3,7 @@ module github.com/explodes/explodio/tokyo
 go 1.15
 
 require (
+	github.com/explodes/explodio/stand v0.0.0-20201124193748-c509f07ac543
 	github.com/go-pg/pg/v10 v10.7.3
 	github.com/golang/protobuf v1.4.3
 	github.com/google/uuid v1.1.2
