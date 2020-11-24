@@ -1,5 +1,8 @@
-FROM golang
-ADD . /go/src/github.com/explodes/explodio/hello
-RUN go install github.com/explodes/explodio/hello
-ENTRYPOINT /go/bin/hello
-EXPOSE 80
+FROM golang:1.15.5 AS build
+WORKDIR /src
+COPY . .
+RUN go build -o /out/bin ./cmd/hello_server
+
+FROM scratch AS bin
+COPY --from=build /out/bin /
+ENTRYPOINT /out/bin/hello_server
