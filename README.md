@@ -2,8 +2,8 @@ explodio
 ========
 
 Dev setup:
- - Install `kubectl`
- - Install `minikube`
+ - Install `kubectl` `kustomize`
+ - Install `minikube` or Docker Desktop.
  - Starting `minikube`:
     - `minikube start --cpus 4 --memory 4096`
  - Preparing postgres:
