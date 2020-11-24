@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: hello
+      app-type: webapp
+  template:
+    metadata:
+      labels:
+        app: hello
+        app-type: webapp
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - name: flyway
+          image: hello-flyway
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: hello-secrets
+      containers:
+        - name: hello
+          image: hello
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 80
+          envFrom:
+            - configMapRef:
+                name: hello
+            - secretRef:
+                name: hello-secrets
+          resources:
+            limits:
+              memory: 1024Mi

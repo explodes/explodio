@@ -1,0 +1,7 @@
+FROM boxfuse/flyway:5.2.4
+
+WORKDIR /flyway
+
+COPY flyway/sql /flyway/sql
+
+ENTRYPOINT /flyway/flyway -url=jdbc:postgresql://postgres/hello-db -user=hello-user -password=$DB_PASSWORD migrate

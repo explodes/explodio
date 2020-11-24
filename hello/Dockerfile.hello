@@ -1,0 +1,5 @@
+FROM golang
+ADD . /go/src/github.com/explodes/explodio/hello
+RUN go install github.com/explodes/explodio/hello
+ENTRYPOINT /go/bin/hello
+EXPOSE 80

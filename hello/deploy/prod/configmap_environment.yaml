@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello
+  labels:
+    app: hello
+data:
+  SAMPLE_ENV: "prod_value"
