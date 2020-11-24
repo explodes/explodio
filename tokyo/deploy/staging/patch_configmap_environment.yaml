@@ -5,4 +5,4 @@ metadata:
   labels:
     app: tokyo
 data:
-  SAMPLE_ENV: "staging_value"
+  PB_PORT: "81"

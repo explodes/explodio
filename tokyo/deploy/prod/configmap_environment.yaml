@@ -5,4 +5,4 @@ metadata:
   labels:
     app: tokyo
 data:
-  PB_PORT: 81
+  PB_PORT: "81"
