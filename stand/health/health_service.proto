@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package tokyo;
+option go_package = "github.com/explodes/explodio/stand";
+
+message HealthRequest {
+}
+
+message HealthResponse {
+}
+
+service Health {
+  rpc Check (HealthRequest) returns (HealthResponse) {
+  }
+}
