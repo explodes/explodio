@@ -8,15 +8,15 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Install the health check binary.
-RUN go build -o healthcheck github.com/explodes/explodio/stand/health/cmd/healthcheck
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -v -a -o healthcheck github.com/explodes/explodio/stand/health/cmd/healthcheck
 
 # Copy sources to the working directory
 COPY . .
 
 # Build the Go app
-RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -a -o server ./cmd/tokyo_server
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -v -a -o server ./cmd/tokyo_server
 
-FROM scratch AS bin
+FROM alpine:latest AS bin
 
 WORKDIR /dist
 
@@ -25,4 +25,5 @@ COPY --from=builder /build/healthcheck .
 COPY --from=builder /build/server .
 
 # Run the executable
+CMD ["./healthcheck"]
 CMD ["./server"]

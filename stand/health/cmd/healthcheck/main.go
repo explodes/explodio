@@ -26,13 +26,13 @@ func main() {
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
 	if err != nil {
-		logger.Errorf("did not connect: %w", err)
+		logger.Errorf("did not connect: %v", err)
 		os.Exit(1)
 	}
 	defer func() {
 		err := conn.Close()
 		if err != nil {
-			logger.Warnf("error closing connection: %w", err)
+			logger.Warnf("error closing connection: %v", err)
 		}
 	}()
 	client := health.NewHealthClient(conn)
@@ -41,7 +41,7 @@ func main() {
 	defer cancelFunc()
 	_, err = client.Check(ctx, &health.HealthRequest{})
 	if err != nil {
-		logger.Errorf("health check failed: %w", err)
+		logger.Errorf("health check failed: %v", err)
 		os.Exit(1)
 	}
 
