@@ -1,17 +1,24 @@
-FROM golang:1.15.5 AS build
+FROM golang:1.15.5 AS builder
 
-RUN mkdir /src
-WORKDIR /src
+# Set the current working directory inside the container
+WORKDIR /build
 
-# Get dependencies, cached if we don't change mod/sum.
-COPY go.mod .
-COPY go.sum .
+# Copy go.mod, go.sum files and download deps
+COPY go.mod go.sum ./
 RUN go mod download
 
-# Build with changed source files.
+# Copy sources to the working directory
 COPY . .
-RUN go build -o /hello_server ./cmd/hello_server
+
+# Build the Go app
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -a -o server ./cmd/hello_server
 
 FROM scratch AS bin
-COPY --from=build /hello_server /
-ENTRYPOINT ["/hello_server"]
+
+WORKDIR /dist
+
+# Copy the build artifacts from the previous stage
+COPY --from=builder /build/server .
+
+# Run the executable
+CMD ["./server"]
