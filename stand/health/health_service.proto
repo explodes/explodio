@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package tokyo;
-option go_package = "github.com/explodes/explodio/stand";
+package health;
+option go_package = "github.com/explodes/explodio/stand/health";
 
 message HealthRequest {
 }
