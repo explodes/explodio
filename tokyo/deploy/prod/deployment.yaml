@@ -34,9 +34,8 @@ spec:
             failureThreshold: 3
             periodSeconds: 10
             initialDelaySeconds: 30
-            httpGet:
-              path: /health
-              port: 80
+            exec:
+              command: [ "/dist/healthcheck", "-addr", ":8001", "-timeout", "10s" ]
           envFrom:
             - configMapRef:
                 name: tokyo
