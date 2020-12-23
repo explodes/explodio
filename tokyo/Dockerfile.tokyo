@@ -7,6 +7,9 @@ WORKDIR /build
 COPY go.mod go.sum ./
 RUN go mod download
 
+# Install the health check binary.
+RUN go build -o healthcheck github.com/explodes/explodio/stand/health/cmd/healthcheck
+
 # Copy sources to the working directory
 COPY . .
 
@@ -18,6 +21,7 @@ FROM scratch AS bin
 WORKDIR /dist
 
 # Copy the build artifacts from the previous stage
+COPY --from=builder /build/healthcheck .
 COPY --from=builder /build/server .
 
 # Run the executable

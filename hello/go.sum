@@ -7,6 +7,7 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
+github.com/explodes/explodio v0.0.5 h1:EQu4U8YMkqqjwKv6RMNjAt6X2Nd2JFNiZ73/YIlmlcc=
 github.com/explodes/explodio/stand v0.0.0-20201124200343-f115d2f1aa54 h1:T8OXFKufwh+U1bvWPekKDxwXR4pbfh2x0zssgRHX/DM=
 github.com/explodes/explodio/stand v0.0.0-20201124200343-f115d2f1aa54/go.mod h1:GTKA8c7mrMWaveNe/BmEqkGNXYUBGYses2aJNRjMOHg=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
