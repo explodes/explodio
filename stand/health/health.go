@@ -2,6 +2,7 @@ package health
 
 import (
 	"context"
+	"fmt"
 	"google.golang.org/grpc"
 )
 
@@ -17,5 +18,6 @@ func AttachHealthServer(s *grpc.Server) {
 }
 
 func (h healthServer) Check(ctx context.Context, request *HealthRequest) (*HealthResponse, error) {
+	fmt.Println("health...")
 	return &HealthResponse{}, nil
 }
