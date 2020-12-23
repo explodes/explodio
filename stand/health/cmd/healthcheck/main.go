@@ -24,7 +24,7 @@ func main() {
 		os.Exit(1)
 	}
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
+	conn, err := grpc.Dial(*addr, grpc.WithInsecure())
 	if err != nil {
 		logger.Errorf("did not connect: %v", err)
 		os.Exit(1)
