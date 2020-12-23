@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"github.com/explodes/explodio/stand"
 	"net/http"
 )
 
@@ -31,12 +31,9 @@ func hello(w http.ResponseWriter, r *http.Request) error {
 }
 
 func main() {
-	port := flag.Int("port", 80, "listen to port")
-	flag.Parse()
-
 	http.HandleFunc("/health", errorMiddleware(health))
 	http.HandleFunc("/", errorMiddleware(hello))
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", *port), nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", stand.RequireEnv("HTTP_PORT")), nil); err != nil {
 		panic(err)
 	}
 }

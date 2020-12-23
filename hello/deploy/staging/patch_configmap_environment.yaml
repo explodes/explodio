@@ -5,4 +5,5 @@ metadata:
   labels:
     app: hello
 data:
-  SAMPLE_ENV: "staging_value"
+  HTTP_PORT: "8000"
+  GRPC_PORT: "8100"

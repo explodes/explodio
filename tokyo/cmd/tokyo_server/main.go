@@ -20,7 +20,7 @@ func main() {
 		panic(fmt.Errorf("unable to create server: %v", err))
 	}
 
-	lis, err := net.Listen("tcp", stand.RequireEnv("PB_PORT"))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", stand.RequireEnv("GRPC_PORT")))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

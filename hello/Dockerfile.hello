@@ -3,15 +3,15 @@ FROM golang:1.15.5 AS build
 RUN mkdir /src
 WORKDIR /src
 
-# Get dependencies, cached if we won't change mod/sum.
+# Get dependencies, cached if we don't change mod/sum.
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
 
 # Build with changed source files.
 COPY . .
-RUN go build -o /out/bin ./cmd/hello_server
+RUN go build -o /hello_server ./cmd/hello_server
 
 FROM scratch AS bin
-COPY --from=build /out/bin /
-ENTRYPOINT /out/bin/hello_server
+COPY --from=build /hello_server /
+ENTRYPOINT ["/hello_server"]

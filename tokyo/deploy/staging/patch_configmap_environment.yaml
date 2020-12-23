@@ -5,4 +5,5 @@ metadata:
   labels:
     app: tokyo
 data:
-  PB_PORT: "81"
+  HTTP_PORT: "8000"
+  GRPC_PORT: "8100"
